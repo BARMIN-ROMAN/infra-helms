@@ -21,6 +21,16 @@ entries:
     urls:
     - https://github.com/rbkmoney/charts/releases/download/riak-0.1.1/riak-0.1.1.tgz
     version: 0.1.1
+  statefull:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2020-12-04T14:48:47.009281373Z"
+    description: A Helm chart for statefull RBK.money services
+    digest: e69b44da77c0463555c8c65eae499ca51c458f8df345470c1272b20df0002b0f
+    name: statefull
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/statefull-0.1.1/statefull-0.1.1.tgz
+    version: 0.1.1
   stateless:
   - apiVersion: v1
     appVersion: "1.0"
