@@ -7,7 +7,6 @@ kind: CiliumNetworkPolicy
 metadata:
   name: {{ $relname }}-{{ .name }}-ingress
   namespace: default
-  labels: GENERATED_LABELS
 spec:
   endpointSelector:
     matchLabels:
@@ -18,20 +17,20 @@ spec:
         k8s:app.kubernetes.io/name: {{ $relname }}
     toPorts:
     {{- range .filters }}
-    - ports:
-      - protocol: {{ .type }}
-        port: {{ .port }}
-    {{- if .rules }} 
-        rules:  
-        {{- range .rules.kafka }}
-        {{- $rolename := .role }}
-          kafka: 
-          {{- range .topics }}
-            - role: {{ $rolename }}
-              topic: {{ . }}
+      - ports:
+        - protocol: {{ .type }}
+          port: {{ .port }}
+      {{- if .rules }} 
+          rules:  
+          {{- range .rules.kafka }}
+          {{- $rolename := .role }}
+            kafka: 
+            {{- range .topics }}
+              - role: {{ $rolename }}
+                topic: {{ . }}
+            {{- end }}
           {{- end }}
-        {{- end }}
-    {{- end }}
+      {{- end }}
     {{- end }}
 {{- end }}
 {{- end }}

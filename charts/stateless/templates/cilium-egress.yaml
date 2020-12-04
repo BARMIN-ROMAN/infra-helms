@@ -1,11 +1,9 @@
 {{ if .Values.out }}
-{{- $relname := .Release.Name -}}
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
   name: {{ .Release.Name }}-egress
   namespace: default
-  labels: GENERATED_LABELS
 spec:
   endpointSelector:
     matchLabels:
@@ -16,10 +14,10 @@ spec:
     - matchLabels:
         k8s:component: {{ .name }}
     toPorts:
-    - ports:
+      - ports:
     {{- range .filters }}
-      - protocol: {{ .type }}
-        port: {{ .port }}
+        - protocol: {{ .type }}
+          port: {{ .port }}
     {{- end }}
   {{- end }}
 {{- end }}
