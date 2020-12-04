@@ -1,0 +1,37 @@
+{{ if .Values.out }}
+{{- $relname := .Release.Name -}}
+{{ range .Values.out }}
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ $relname }}-{{ .name }}-ingress
+  namespace: default
+  labels: GENERATED_LABELS
+spec:
+  endpointSelector:
+    matchLabels:
+      SELECTOR_LABEL: {{ .name }}
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        k8s:app.kubernetes.io/name: {{ $relname }}
+    toPorts:
+    {{- range .filters }}
+    - ports:
+      - protocol: {{ .type }}
+        port: {{ .port }}
+    {{- if .rules }} 
+        rules:  
+        {{- range .rules.kafka }}
+        {{- $rolename := .role }}
+          kafka: 
+          {{- range .topics }}
+            - role: {{ $rolename }}
+              topic: {{ . }}
+          {{- end }}
+        {{- end }}
+    {{- end }}
+    {{- end }}
+{{- end }}
+{{- end }}
