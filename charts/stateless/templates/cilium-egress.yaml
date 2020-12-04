@@ -7,12 +7,12 @@ metadata:
 spec:
   endpointSelector:
     matchLabels:
-      k8s:app.kubernetes.io/name: {{ .Release.Name }}
+      k8s:selector.cilium.rbkmoney/release: {{ .Release.Name }}
   egress:
   {{- range .Values.out }}
   - toEndpoints:
     - matchLabels:
-        k8s:component: {{ .name }}
+        k8s:selector.cilium.rbkmoney/release: {{ .name }}
     toPorts:
       - ports:
     {{- range .filters }}

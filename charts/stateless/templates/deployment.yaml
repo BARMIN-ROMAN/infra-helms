@@ -15,6 +15,7 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "stateless.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+        selector.cilium.rbkmoney/release: {{ .Release.Name }}
       annotations:
       {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}

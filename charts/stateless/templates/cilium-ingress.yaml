@@ -10,11 +10,11 @@ metadata:
 spec:
   endpointSelector:
     matchLabels:
-      SELECTOR_LABEL: {{ .name }}
+      k8s:selector.cilium.rbkmoney/release: {{ .name }}
   ingress:
   - fromEndpoints:
     - matchLabels:
-        k8s:app.kubernetes.io/name: {{ $relname }}
+        k8s:selector.cilium.rbkmoney/release: {{ $relname }}
     toPorts:
     {{- range .filters }}
       - ports:
