@@ -19,17 +19,17 @@ spec:
     {{- range .filters }}
       - ports:
         - protocol: {{ .type }}
-          port: {{ .port }}
+          port: {{ .port | quote }}
       {{- if .rules }} 
-          rules:  
-            kafka:
-          {{- range .rules.kafka }}
-          {{- $rolename := .role }} 
-            {{- range .topics }}
-              - role: {{ $rolename }}
-                topic: {{ . }}
-            {{- end }}
+        rules:  
+          kafka:
+        {{- range .rules.kafka }}
+        {{- $rolename := .role }} 
+          {{- range .topics }}
+            - role: {{ $rolename }}
+              topic: {{ . }}
           {{- end }}
+        {{- end }}
       {{- end }}
     {{- end }}
 {{- end }}

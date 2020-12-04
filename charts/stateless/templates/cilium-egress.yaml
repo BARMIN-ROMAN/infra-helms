@@ -17,7 +17,7 @@ spec:
       - ports:
     {{- range .filters }}
         - protocol: {{ .type }}
-          port: {{ .port }}
+          port: {{ .port | quote }}
     {{- end }}
   {{- end }}
 {{- end }}
