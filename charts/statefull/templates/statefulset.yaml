@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: {{ include "statefull.fullname" . }}
   labels:
-{{ include "stateless.labels" . | indent 4 }}
+{{ include "statefull.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   updateStrategy:
