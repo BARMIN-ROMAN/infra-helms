@@ -130,3 +130,5 @@ metrics:
 logs:
   enabled: true
   json: false
+
+out: []
