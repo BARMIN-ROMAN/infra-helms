@@ -1,0 +1,36 @@
+{{ if .Values.out }}
+{{- $relname := .Release.Name -}}
+{{ range .Values.out }}
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ $relname }}-{{ .name }}-ingress
+  namespace: default
+spec:
+  endpointSelector:
+    matchLabels:
+      k8s:selector.cilium.rbkmoney/release: {{ .name }}
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        k8s:selector.cilium.rbkmoney/release: {{ $relname }}
+    toPorts:
+    {{- range .filters }}
+      - ports:
+        - protocol: {{ .type }}
+          port: {{ .port }}
+      {{- if .rules }} 
+          rules:  
+            kafka:
+          {{- range .rules.kafka }}
+          {{- $rolename := .role }} 
+            {{- range .topics }}
+              - role: {{ $rolename }}
+                topic: {{ . }}
+            {{- end }}
+          {{- end }}
+      {{- end }}
+    {{- end }}
+{{- end }}
+{{- end }}
