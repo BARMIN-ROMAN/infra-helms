@@ -22,9 +22,9 @@ spec:
           port: {{ .port }}
       {{- if .rules }} 
           rules:  
+            kafka:
           {{- range .rules.kafka }}
-          {{- $rolename := .role }}
-            kafka: 
+          {{- $rolename := .role }} 
             {{- range .topics }}
               - role: {{ $rolename }}
                 topic: {{ . }}
