@@ -1,0 +1,45 @@
+apiVersion: v1
+entries:
+  elk:
+  - apiVersion: v1
+    appVersion: 7.9.1
+    created: "2020-12-04T09:57:17.435439765Z"
+    description: A Helm chart for logs
+    digest: 70fc03d83d47a281993b372976ac8c364e7eeaec2cd97ae987622423e45092ee
+    name: elk
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/elk-0.1.0/elk-0.1.0.tgz
+    version: 0.1.0
+  riak:
+  - apiVersion: v2
+    appVersion: f5b757c2ec73c7db1460c94a17a20a3b5799fde6
+    created: "2020-12-04T09:57:17.550005069Z"
+    description: A simple riak cluster for Kubernetes
+    digest: 1f62bc2a582cdd3fac1e8c7843c2f539be6201e39d8c6deee4aa357194ed5f24
+    name: riak
+    type: application
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/riak-0.1.1/riak-0.1.1.tgz
+    version: 0.1.1
+  stateless:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2020-12-04T09:57:17.691979935Z"
+    description: A Helm chart for stateless RBK.money services
+    digest: f153a19802f04f71da632f6d9c3495076ac5ba9574e27c386bf2407d5cfb6938
+    name: stateless
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/stateless-0.1.0/stateless-0.1.0.tgz
+    version: 0.1.0
+  test-transaction:
+  - apiVersion: v2
+    appVersion: d00bb62cb1b685fc5227cdce224174bf21ef333f
+    created: "2020-12-04T09:57:17.832415514Z"
+    description: A chart for test transaction
+    digest: 72f55e50b8a81e1d2c41e20a9078a0b41a1e1ea174dfa2fb47f9a3210ceeda9c
+    name: test-transaction
+    type: application
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/test-transaction-0.1.1/test-transaction-0.1.1.tgz
+    version: 0.1.1
+generated: "2020-12-04T09:57:17.317340792Z"
