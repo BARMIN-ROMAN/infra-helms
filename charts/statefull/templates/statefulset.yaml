@@ -21,7 +21,7 @@ spec:
         selector.cilium.rbkmoney/release: {{ .Release.Name }}
       annotations:
       {{- if or .Values.configMap .Values.secret }}
-        config/checksum: {{ include "statefull.configHash" }}
+        config/checksum: {{ include "statefull.configHash" . }}
       {{- end }}
       {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
