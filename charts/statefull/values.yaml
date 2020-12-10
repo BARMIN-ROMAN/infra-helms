@@ -149,8 +149,8 @@ ciliumPolicies: []
   #             - bla2
  
 storage:
+ enabled: false
  accessModes: ["ReadWriteOnce"]
- storageClassName: ""
  resources:
     requests:
       storage: 1Gi

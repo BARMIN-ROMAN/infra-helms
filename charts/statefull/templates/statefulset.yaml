@@ -90,6 +90,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  {{- if .Values.storage.enabled }}
   volumeClaimTemplates:
     - metadata:
         name: data
@@ -97,3 +98,4 @@ spec:
       spec:
        {{- toYaml . | nindent 10 }}
       {{- end }}
+  {{- end }}
