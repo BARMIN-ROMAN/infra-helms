@@ -131,4 +131,25 @@ logs:
   enabled: true
   json: false
 
-out: []
+ciliumPolicies: []
+  # - name: consul
+  #   namespace: default
+  #   filters:
+  #     - port: 8500
+  #       type: TCP
+  # - name: kafka
+  #   namespace: default
+  #   filters:
+  #     - port: 9092
+  #       type: TCP
+  #       rules:
+  #         kafka:
+  #         - role: produce
+  #           topics: 
+  #             - bla1
+  #             - blah-blah-2
+  #         - role: consume
+  #           topics:
+  #             - bla1
+  #             - bla2
+ 

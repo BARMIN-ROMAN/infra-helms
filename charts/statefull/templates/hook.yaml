@@ -6,6 +6,7 @@ metadata:
   name: "{{ .Release.Name }}-init-task"
   labels:
 {{ include "statefull.labels" . | indent 4 }}
+    selector.cilium.rbkmoney/release: {{ .Release.Name }}
   annotations:
     "helm.sh/hook": {{ .Values.hook.kind }}
     "helm.sh/hook-delete-policy": before-hook-creation

@@ -1,6 +1,6 @@
-{{ if .Values.out }}
+{{ if .Values.ciliumPolicies }}
 {{- $relname := .Release.Name -}}
-{{ range .Values.out }}
+{{ range .Values.ciliumPolicies }}
 ---
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy

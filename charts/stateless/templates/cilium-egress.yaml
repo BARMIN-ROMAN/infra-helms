@@ -1,4 +1,4 @@
-{{ if .Values.out }}
+{{ if .Values.ciliumPolicies }}
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
@@ -9,7 +9,7 @@ spec:
     matchLabels:
       k8s:selector.cilium.rbkmoney/release: {{ .Release.Name }}
   egress:
-  {{- range .Values.out }}
+  {{- range .Values.ciliumPolicies }}
   - toEndpoints:
     - matchLabels:
         k8s:selector.cilium.rbkmoney/release: {{ .name }}
