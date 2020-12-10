@@ -49,3 +49,10 @@ Create the name of the service account to use
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Create configs hash
+*/}}
+{{- define "statefull.configHash" -}}
+{{ print .Values.configMap .Values.secret | sha256sum }}
+{{- end -}}

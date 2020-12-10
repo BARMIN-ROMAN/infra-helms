@@ -20,6 +20,9 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         selector.cilium.rbkmoney/release: {{ .Release.Name }}
       annotations:
+      {{- if or .Values.configMap .Values.secret }}
+        config/checksum: {{ include "statefull.configHash" }}
+      {{- end }}
       {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
