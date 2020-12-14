@@ -6,7 +6,6 @@ metadata:
   name: "{{ .Release.Name }}-init-task"
   labels:
 {{ include "statefull.labels" . | indent 4 }}
-    selector.cilium.rbkmoney/release: {{ .Release.Name }}
   annotations:
     "helm.sh/hook": {{ .Values.hook.kind }}
     "helm.sh/hook-delete-policy": before-hook-creation
@@ -17,6 +16,7 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "statefull.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+        selector.cilium.rbkmoney/release: {{ .Release.Name }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
