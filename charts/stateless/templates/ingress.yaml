@@ -1,7 +1,8 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "stateless.fullname" . -}}
 {{- $svcPort := .Values.ingress.servicePort -}}
-{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
+{{- $kVer :=  .Capabilities.KubeVersion.GitVersion -}}
+{{- if semverCompare ">=1.19-0"  $kVer -}}
 apiVersion: networking.k8s.io/v1
 {{- else -}}
 apiVersion: networking.k8s.io/v1beta1
@@ -35,10 +36,15 @@ spec:
           - path: {{ . }}
             pathType: Prefix
             backend:
+              {{- if semverCompare ">=1.19-0" $kVer }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
+              {{- else }}
               service:
                 name: {{ $fullName }}
                 port:
                   number: {{ $svcPort }}
+              {{- end }}
         {{- end }}
   {{- end }}
 {{- end }}
