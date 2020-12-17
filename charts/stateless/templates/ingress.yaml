@@ -37,13 +37,13 @@ spec:
             pathType: Prefix
             backend:
               {{- if semverCompare ">=1.19-0" $kVer }}
-              serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
-              {{- else }}
               service:
                 name: {{ $fullName }}
                 port:
                   number: {{ $svcPort }}
+              {{- else }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
               {{- end }}
         {{- end }}
   {{- end }}
