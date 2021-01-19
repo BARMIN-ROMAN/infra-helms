@@ -33,13 +33,13 @@ entries:
   raw:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-01-19T13:45:07.266486241Z"
+    created: "2021-01-19T13:49:55.261338341Z"
     description: A Helm chart for configmaps and secrets usefull for RBK.money services
-    digest: 858fd1217b5fe7e378c77a86b3c85210aa5a1ce5c800e7e5f2b766620fca8658
+    digest: ddd882f72de7ee9fd73f20964a9f19481e62e2332e1dad8deea308be609e3bb9
     name: raw
     urls:
-    - https://github.com/rbkmoney/charts/releases/download/raw-0.1.2/raw-0.1.2.tgz
-    version: 0.1.2
+    - https://github.com/rbkmoney/charts/releases/download/raw-0.1.1/raw-0.1.1.tgz
+    version: 0.1.1
   riak:
   - apiVersion: v2
     appVersion: f5b757c2ec73c7db1460c94a17a20a3b5799fde6
