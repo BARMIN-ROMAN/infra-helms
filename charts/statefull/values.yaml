@@ -46,6 +46,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
+  headless: false
   type: ClusterIP
   ports:
     - name: api
@@ -149,7 +150,6 @@ ciliumPolicies: []
   #             - bla2
  
 storage:
- enabled: false
  accessModes: ["ReadWriteOnce"]
  resources:
     requests:
