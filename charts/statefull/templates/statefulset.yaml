@@ -8,7 +8,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
   updateStrategy:
     type: RollingUpdate
-  serviceName: {{ include "statefull.fullname" . }}
+  serviceName: {{ include "statefull.fullname" . }}-headless
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "statefull.name" . }}
