@@ -54,6 +54,15 @@ entries:
   statefull:
   - apiVersion: v1
     appVersion: "1.0"
+    created: "2021-02-17T09:07:18.242719953Z"
+    description: A Helm chart for statefull RBK.money services
+    digest: a09165e1a3f3100917a3b737e11f9bbeb47f5114c1ca0d68745a98506c9bc781
+    name: statefull
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/statefull-0.1.18/statefull-0.1.18.tgz
+    version: 0.1.18
+  - apiVersion: v1
+    appVersion: "1.0"
     created: "2021-02-16T14:18:37.287376846Z"
     description: A Helm chart for statefull RBK.money services
     digest: 1631fcb4210bbcc3990b19d074260b54445517dfd30fad1767d733b27f8ec0e4
