@@ -308,6 +308,16 @@ entries:
   test-transaction:
   - apiVersion: v2
     appVersion: d00bb62cb1b685fc5227cdce224174bf21ef333f
+    created: "2021-02-19T15:56:56.725894394Z"
+    description: A chart for test transaction
+    digest: 86f08c57cc0b33c545b79a2cf763c324d036fbdb7fdf39f8a741682eaa40fe3d
+    name: test-transaction
+    type: application
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/test-transaction-0.1.3/test-transaction-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: d00bb62cb1b685fc5227cdce224174bf21ef333f
     created: "2021-02-19T11:16:11.237163103Z"
     description: A chart for test transaction
     digest: 6aaddb0800d20b9e63e8184e855d716ec627ced0ad0eea118edcf985e97a2f99
