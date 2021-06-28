@@ -54,6 +54,15 @@ entries:
   statefull:
   - apiVersion: v1
     appVersion: "1.0"
+    created: "2021-06-28T13:27:40.803774698Z"
+    description: A Helm chart for statefull RBK.money services
+    digest: fa22b9b18d1d5c2b8bb3bece52dc5e715fd28d1202c5e3fe9a93ebea29ca370e
+    name: statefull
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/statefull-0.1.20/statefull-0.1.20.tgz
+    version: 0.1.20
+  - apiVersion: v1
+    appVersion: "1.0"
     created: "2021-02-25T21:03:07.82917429Z"
     description: A Helm chart for statefull RBK.money services
     digest: f8577fe96eb0eda79eede7e1d4fa74e8ddedf445552736b0bf7cf78507b36929
@@ -215,6 +224,15 @@ entries:
     - https://github.com/rbkmoney/charts/releases/download/statefull-0.1.1/statefull-0.1.1.tgz
     version: 0.1.1
   stateless:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2021-06-28T13:27:40.992038305Z"
+    description: A Helm chart for stateless RBK.money services
+    digest: cf7682ec8c6c309e2bfa36e8fc1fe86987a7dc29682f0891af3eba5a61a5516e
+    name: stateless
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/stateless-0.1.15/stateless-0.1.15.tgz
+    version: 0.1.15
   - apiVersion: v1
     appVersion: "1.0"
     created: "2021-02-25T21:04:43.820700568Z"
