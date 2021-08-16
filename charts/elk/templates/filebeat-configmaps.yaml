@@ -24,7 +24,7 @@ data:
              }
            },
            "warm": {
-             "min_age": "{{ mul .Values.data.retention.warm }}h",
+             "min_age": "{{ .Values.data.retention.warm }}h",
              "actions": {
                "set_priority": {
                  "priority": null
@@ -32,7 +32,7 @@ data:
              }
            },
            "delete": {
-             "min_age": "{{ mul .Values.data.retention.delete }}h",
+             "min_age": "{{ .Values.data.retention.delete }}h",
              "actions": {
                "delete": {
                  "delete_searchable_snapshot": true
