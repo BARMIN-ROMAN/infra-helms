@@ -17,7 +17,7 @@ elastic:
   data:
     replicas: 1
     podTemplate: {}
-    retension:
+    retention:
       rollover: 2
       warm: 4
       delete: 24
