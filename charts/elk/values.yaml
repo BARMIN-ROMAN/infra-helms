@@ -13,8 +13,14 @@ elastic:
   nameref: "rbkmoney"
   master:
     replicas: 1
+    podTemplate: {}
   data:
     replicas: 1
+    podTemplate: {}
+    retension:
+      rollover: 2
+      warm: 4
+      delete: 24
     
 kibana:
   nameref: "rbkmoney"
@@ -44,6 +50,7 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
 
 
 hooks:

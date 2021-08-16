@@ -9,4 +9,36 @@ data:
   index_template_json: |
     {{- .Files.Get "files/filebeat-index-template.json" | nindent 4 }}
   ilm_policy_json: |
-    {{- .Files.Get "files/filebeat-ilm-policy-8h.json" | nindent 4 }}
+    {
+       "policy": {
+         "phases": {
+           "hot": {
+             "min_age": "0ms",
+             "actions": {
+               "rollover": {
+                 "max_age": "{{ .Values.data.retention.rollover }}h"
+               },
+               "set_priority": {
+                 "priority": 100
+               }
+             }
+           },
+           "warm": {
+             "min_age": "{{ mul .Values.data.retention.warm }}h",
+             "actions": {
+               "set_priority": {
+                 "priority": null
+               }
+             }
+           },
+           "delete": {
+             "min_age": "{{ mul .Values.data.retention.delete }}h",
+             "actions": {
+               "delete": {
+                 "delete_searchable_snapshot": true
+               }
+             }
+           }
+         }
+       }
+    }
