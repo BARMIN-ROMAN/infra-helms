@@ -1,9 +1,13 @@
 ---
-# Source: eck/templates/namespace.yaml
+# Source: eck/templates/operator-namespace.yaml
 apiVersion: v1
 kind: Namespace
 metadata:
   name: elastic-system
+  labels:
+    name: elastic-system
+    control-plane: elastic-operator
+    app.kubernetes.io/version: "1.4.0"
 ---
 # Source: eck/templates/service-account.yaml
 apiVersion: v1
@@ -11,19 +15,55 @@ kind: ServiceAccount
 metadata:
   name: elastic-operator
   namespace: elastic-system
+  labels:
+    control-plane: elastic-operator
+    app.kubernetes.io/version: "1.4.0"
 ---
 # Source: eck/templates/webhook.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: "elastic-webhook-server-cert"
+  name: elastic-webhook-server-cert
   namespace: elastic-system
+  labels:
+    control-plane: elastic-operator
+    app.kubernetes.io/version: "1.4.0"
 ---
-# Source: eck/templates/cluster-role.yaml
+# Source: eck/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elastic-operator
+  namespace: elastic-system
+  labels:
+    control-plane: elastic-operator
+    app.kubernetes.io/version: "1.4.0"
+data:
+  eck.yaml: |-
+    log-verbosity: 0
+    metrics-port: 0
+    container-registry: docker.elastic.co
+    max-concurrent-reconciles: 3
+    ca-cert-validity: 8760h
+    ca-cert-rotate-before: 24h
+    cert-validity: 8760h
+    cert-rotate-before: 24h
+    set-default-security-context: true
+    kube-client-timeout: 60s
+    elasticsearch-client-timeout: 180s
+    disable-telemetry: false
+    validate-storage-class: true
+    enable-webhook: true
+    webhook-name: elastic-webhook.k8s.elastic.co
+---
+# Source: eck/templates/cluster-roles.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: elastic-operator
+  labels:
+    control-plane: elastic-operator
+    app.kubernetes.io/version: "1.4.0"
 rules:
 - apiGroups:
   - "authorization.k8s.io"
@@ -81,7 +121,7 @@ rules:
   resources:
   - elasticsearches
   - elasticsearches/status
-  - elasticsearches/finalizers
+  - elasticsearches/finalizers # needed for ownerReferences with blockOwnerDeletion on OCP
   - enterpriselicenses
   - enterpriselicenses/status
   verbs:
@@ -97,7 +137,7 @@ rules:
   resources:
   - kibanas
   - kibanas/status
-  - kibanas/finalizers
+  - kibanas/finalizers # needed for ownerReferences with blockOwnerDeletion on OCP
   verbs:
   - get
   - list
@@ -111,7 +151,7 @@ rules:
   resources:
   - apmservers
   - apmservers/status
-  - apmservers/finalizers
+  - apmservers/finalizers # needed for ownerReferences with blockOwnerDeletion on OCP
   verbs:
   - get
   - list
@@ -125,20 +165,7 @@ rules:
   resources:
   - enterprisesearches
   - enterprisesearches/status
-  - enterprisesearches/finalizers
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-- apiGroups:
-  - admissionregistration.k8s.io
-  resources:
-  - mutatingwebhookconfigurations
-  - validatingwebhookconfigurations
+  - enterprisesearches/finalizers # needed for ownerReferences with blockOwnerDeletion on OCP
   verbs:
   - get
   - list
@@ -152,7 +179,42 @@ rules:
   resources:
   - beats
   - beats/status
-  - beats/finalizers
+  - beats/finalizers # needed for ownerReferences with blockOwnerDeletion on OCP
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - agent.k8s.elastic.co
+  resources:
+  - agents
+  - agents/status
+  - agents/finalizers # needed for ownerReferences with blockOwnerDeletion on OCP
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - storageclasses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - mutatingwebhookconfigurations
+  - validatingwebhookconfigurations
   verbs:
   - get
   - list
@@ -162,7 +224,7 @@ rules:
   - patch
   - delete
 ---
-# Source: eck/templates/cluster-role.yaml
+# Source: eck/templates/cluster-roles.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -171,24 +233,26 @@ metadata:
     rbac.authorization.k8s.io/aggregate-to-view: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    control-plane: elastic-operator
+    app.kubernetes.io/version: "1.4.0"
 rules:
-  - apiGroups: ["elasticsearch.k8s.elastic.co"]
-    resources: ["elasticsearches"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["apm.k8s.elastic.co"]
-    resources: ["apmservers"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["kibana.k8s.elastic.co"]
-    resources: ["kibanas"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["enterprisesearch.k8s.elastic.co"]
-    resources: ["enterprisesearches"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: ["beat.k8s.elastic.co"]
-    resources: ["beats"]
-    verbs: ["get", "list", "watch"]
+- apiGroups: ["elasticsearch.k8s.elastic.co"]
+  resources: ["elasticsearches"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apm.k8s.elastic.co"]
+  resources: ["apmservers"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["kibana.k8s.elastic.co"]
+  resources: ["kibanas"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["enterprisesearch.k8s.elastic.co"]
+  resources: ["enterprisesearches"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["beat.k8s.elastic.co"]
+  resources: ["beats"]
+  verbs: ["get", "list", "watch"]
 ---
-# Source: eck/templates/cluster-role.yaml
+# Source: eck/templates/cluster-roles.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -196,43 +260,33 @@ metadata:
   labels:
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    control-plane: elastic-operator
+    app.kubernetes.io/version: "1.4.0"
 rules:
-  - apiGroups: ["elasticsearch.k8s.elastic.co"]
-    resources: ["elasticsearches"]
-    verbs: ["create", "delete", "deletecollection", "patch", "update"]
-  - apiGroups: ["apm.k8s.elastic.co"]
-    resources: ["apmservers"]
-    verbs: ["create", "delete", "deletecollection", "patch", "update"]
-  - apiGroups: ["kibana.k8s.elastic.co"]
-    resources: ["kibanas"]
-    verbs: ["create", "delete", "deletecollection", "patch", "update"]
-  - apiGroups: ["enterprisesearch.k8s.elastic.co"]
-    resources: ["enterprisesearches"]
-    verbs: ["create", "delete", "deletecollection", "patch", "update"]
-  - apiGroups: ["beat.k8s.elastic.co"]
-    resources: ["beats"]
-    verbs: ["create", "delete", "deletecollection", "patch", "update"]
+- apiGroups: ["elasticsearch.k8s.elastic.co"]
+  resources: ["elasticsearches"]
+  verbs: ["create", "delete", "deletecollection", "patch", "update"]
+- apiGroups: ["apm.k8s.elastic.co"]
+  resources: ["apmservers"]
+  verbs: ["create", "delete", "deletecollection", "patch", "update"]
+- apiGroups: ["kibana.k8s.elastic.co"]
+  resources: ["kibanas"]
+  verbs: ["create", "delete", "deletecollection", "patch", "update"]
+- apiGroups: ["enterprisesearch.k8s.elastic.co"]
+  resources: ["enterprisesearches"]
+  verbs: ["create", "delete", "deletecollection", "patch", "update"]
+- apiGroups: ["beat.k8s.elastic.co"]
+  resources: ["beats"]
+  verbs: ["create", "delete", "deletecollection", "patch", "update"]
 ---
-# Source: eck/templates/managed-ns-role-bindings.yaml
+# Source: eck/templates/operator-role-binding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: elastic-operator
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: elastic-operator
-subjects:
-- kind: ServiceAccount
-  name: elastic-operator
-  namespace: elastic-system
----
-# Source: eck/templates/operator-role-binding.yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: elastic-operator
-  namespace: elastic-system
+  labels:
+    control-plane: elastic-operator
+    app.kubernetes.io/version: "1.4.0"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -248,11 +302,14 @@ kind: Service
 metadata:
   name: elastic-webhook-server
   namespace: elastic-system
+  labels:
+    control-plane: elastic-operator
+    app.kubernetes.io/version: "1.4.0"
 spec:
   ports:
-    - name: https
-      port: 443
-      targetPort: 9443
+  - name: https
+    port: 443
+    targetPort: 9443
   selector:
     control-plane: elastic-operator
 ---
@@ -264,73 +321,108 @@ metadata:
   namespace: elastic-system
   labels:
     control-plane: elastic-operator
+    app.kubernetes.io/version: "1.4.0"
 spec:
   selector:
     matchLabels:
       control-plane: elastic-operator
   serviceName: elastic-operator
+  replicas: 1
   template:
     metadata:
       annotations:
         # Rename the fields "error" to "error.message" and "source" to "event.source"
         # This is to avoid a conflict with the ECS "error" and "source" documents.
         "co.elastic.logs/raw": "[{\"type\":\"container\",\"json.keys_under_root\":true,\"paths\":[\"/var/log/containers/*${data.kubernetes.container.id}.log\"],\"processors\":[{\"convert\":{\"mode\":\"rename\",\"ignore_missing\":true,\"fields\":[{\"from\":\"error\",\"to\":\"_error\"}]}},{\"convert\":{\"mode\":\"rename\",\"ignore_missing\":true,\"fields\":[{\"from\":\"_error\",\"to\":\"error.message\"}]}},{\"convert\":{\"mode\":\"rename\",\"ignore_missing\":true,\"fields\":[{\"from\":\"source\",\"to\":\"_source\"}]}},{\"convert\":{\"mode\":\"rename\",\"ignore_missing\":true,\"fields\":[{\"from\":\"_source\",\"to\":\"event.source\"}]}}]}]"
+        "checksum/config": 0d548bc052adb33254689ac24a212460301624526d6dc5336fb42d10c9775770
       labels:
         control-plane: elastic-operator
     spec:
       terminationGracePeriodSeconds: 10
       serviceAccountName: elastic-operator
+      securityContext:
+        runAsNonRoot: true
       containers:
-      - image: "docker.elastic.co/eck/eck-operator:1.2.1"
+      - image: "docker.elastic.co/eck/eck-operator:1.4.0"
         imagePullPolicy: IfNotPresent
         name: manager
         args:
-          - "manager"
-          - "--log-verbosity=0"
-          - "--metrics-port=0"
-          - "--container-registry=docker.elastic.co"
-          - "--max-concurrent-reconciles=3"
-          - "--ca-cert-validity=8760h"
-          - "--ca-cert-rotate-before=24h"
-          - "--cert-validity=8760h"
-          - "--cert-rotate-before=24h"
-          - "--enable-webhook"
+        - "manager"
+        - "--log-verbosity=0"
+        - "--metrics-port=0"
+        - "--container-registry=docker.elastic.co"
+        - "--max-concurrent-reconciles=3"
+        - "--ca-cert-validity=8760h"
+        - "--ca-cert-rotate-before=24h"
+        - "--cert-validity=8760h"
+        - "--cert-rotate-before=24h"
+        - "--enable-webhook"
+        - "--ip-family=IPv6"
         env:
-          - name: OPERATOR_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
-          - name: OPERATOR_IMAGE
-            value: "docker.elastic.co/eck/eck-operator:1.2.1"
-          - name: WEBHOOK_SECRET
-            value: "elastic-webhook-server-cert"
+        - name: OPERATOR_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: WEBHOOK_SECRET
+          value: elastic-webhook-server-cert
         resources:
-            limits:
-              cpu: 1
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 150Mi
+          limits:
+            cpu: 1
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 150Mi
         ports:
         - containerPort: 9443
           name: https-webhook
           protocol: TCP
         volumeMounts:
-          - mountPath: /tmp/k8s-webhook-server/serving-certs
-            name: cert
-            readOnly: true
+        - mountPath: "/conf"
+          name: conf
+          readOnly: true
+        - mountPath: /tmp/k8s-webhook-server/serving-certs
+          name: cert
+          readOnly: true
       volumes:
-        - name: cert
-          secret:
-            defaultMode: 420
-            secretName: "elastic-webhook-server-cert"
+      - name: conf
+        configMap:
+          name: elastic-operator
+      - name: cert
+        secret:
+          defaultMode: 420
+          secretName: elastic-webhook-server-cert
 ---
 # Source: eck/templates/webhook.yaml
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: ValidatingWebhookConfiguration
 metadata:
   name: elastic-webhook.k8s.elastic.co
+  labels:
+    control-plane: elastic-operator
+    app.kubernetes.io/version: "1.4.0"
 webhooks:
+- clientConfig:
+    caBundle: Cg==
+    service:
+      name: elastic-webhook-server
+      namespace: elastic-system
+      path: /validate-agent-k8s-elastic-co-v1alpha1-agent
+  failurePolicy: Ignore
+  name: elastic-agent-validation-v1alpha1.k8s.elastic.co
+  rules:
+  - apiGroups:
+    - agent.k8s.elastic.co
+    apiVersions:
+    - v1alpha1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - agents
 - clientConfig:
     caBundle: Cg==
     service:
@@ -385,6 +477,24 @@ webhooks:
     - UPDATE
     resources:
     - beats
+- clientConfig:
+    caBundle: Cg==
+    service:
+      name: elastic-webhook-server
+      namespace: elastic-system
+      path: /validate-enterprisesearch-k8s-elastic-co-v1beta1-enterprisesearch
+  failurePolicy: Ignore
+  name: elastic-ent-validation-v1beta1.k8s.elastic.co
+  rules:
+  - apiGroups:
+    - enterprisesearch.k8s.elastic.co
+    apiVersions:
+    - v1beta1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - enterprisesearches
 - clientConfig:
     caBundle: Cg==
     service:
