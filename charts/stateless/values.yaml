@@ -152,3 +152,12 @@ ciliumPolicies: []
   #           topics:
   #             - bla1
   #             - bla2
+
+cronjob:
+  enabled: false
+  schedule: "*/1 * * * *"
+  image:
+    repository: docker.io/nginx
+    tag: latest
+    pullPolicy: IfNotPresent
+  args: []

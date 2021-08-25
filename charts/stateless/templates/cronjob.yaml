@@ -25,6 +25,7 @@ spec:
           containers:
             - name: {{ .Release.Name }}
               image: "{{ .Values.cronjob.image.repository }}:{{ .Values.cronjob.image.tag | default .Chart.appVersion }}"
+              imagePullPolicy: {{ .Values.cronjob.image.pullPolicy }}
               args:
                 {{- toYaml .Values.cronjob.args | nindent 16 }}
           restartPolicy: OnFailure
