@@ -24,7 +24,7 @@ spec:
           serviceAccountName: {{ include "stateless.serviceAccountName" . }}
           containers:
             - name: {{ .Release.Name }}
-              image: "{{ .Values.cronjob.image.repository }}:{{ .Values.cronjob.image.tag | default .Chart.appVersion }}"
+              image: "{{ .Values.cronjob.image.repository }}:{{ .Values.cronjob.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.cronjob.image.pullPolicy }}
               args:
                 {{- toYaml .Values.cronjob.args | nindent 16 }}
