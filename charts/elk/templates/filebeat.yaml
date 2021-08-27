@@ -23,7 +23,15 @@ spec:
           type: container
           paths:
             - /var/log/containers/*-${data.container.id}.log  # CRI path
-
+          fields_under_root: true
+          json.add_error_key: true
+          json.keys_under_root: true
+          json.message_key: message
+          json.overwrite_keys: true
+          multiline.match: after
+          multiline.negate: false
+          multiline.pattern: '^[[:space:]]+(at|\.{3})[[:space:]]+\b|^Caused by:'
+          multiline.type: pattern
     logging:
       level: info
     # output.elasticsearch:
