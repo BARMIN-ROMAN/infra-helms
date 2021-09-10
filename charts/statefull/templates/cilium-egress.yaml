@@ -3,7 +3,7 @@ apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
   name: {{ .Release.Name }}-egress
-  namespace: default
+  namespace: {{ .Release.Namespace }}
 spec:
   endpointSelector:
     matchLabels:
