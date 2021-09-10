@@ -6,7 +6,7 @@ apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
   name: {{ $relname }}-{{ .name }}-ingress
-  namespace: default
+  namespace: {{ .Release.Namespace }}
 spec:
   endpointSelector:
     matchLabels:
