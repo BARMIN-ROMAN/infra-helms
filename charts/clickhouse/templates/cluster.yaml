@@ -4,6 +4,8 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
+  defaults:
+    replicasUseFQDN: {{ .Values.replicasUseFQDN | quote }}
   configuration:
     {{- if .Values.zookeeper }}
     zookeeper:
@@ -27,6 +29,10 @@ spec:
       {{ .username }}/networks/ip:
         {{- range $network := .networks }}
         - {{ $network }}
+        {{- end }}
+      {{ .username }}/allow_databases/database:
+        {{- range $database := .databases }}
+        - {{ $database }}
         {{- end }}
       {{- end }}
 

@@ -6,6 +6,8 @@ clusterName: "cluster"
 shardsCount: 1
 replicasCount: 1
 
+replicasUseFQDN: "no"
+
 image:
   repository: yandex/clickhouse-server
   tag: 19.17
