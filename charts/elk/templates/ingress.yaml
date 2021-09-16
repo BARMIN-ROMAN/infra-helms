@@ -1,5 +1,5 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := .Values.kibana.nameref . -}}
+{{- $fullName := .Values.kibana.nameref -}}
 {{- $kVer :=  .Capabilities.KubeVersion.GitVersion -}}
 {{- if semverCompare ">=1.19.0-0"  $kVer -}}
 apiVersion: networking.k8s.io/v1
