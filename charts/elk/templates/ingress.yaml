@@ -12,12 +12,6 @@ metadata:
   labels:
 {{ include "elk.labels" . | indent 4 }}
   annotations:
-{{- if .Values.services }}
-  {{- if .Values.services.ingress.tls.letsEncrypt.enabled }}
-    cert-manager.io/cluster-issuer: {{ .Values.services.ingress.tls.letsEncrypt.issuer }}
-  {{- end }}
-    kubernetes.io/ingress.class: {{ .Values.services.ingress.class }}
-{{- end }}
   {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
