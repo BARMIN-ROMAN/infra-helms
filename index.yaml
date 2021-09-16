@@ -3,6 +3,15 @@ entries:
   elk:
   - apiVersion: v1
     appVersion: 7.10.0
+    created: "2021-09-16T12:48:26.094884237Z"
+    description: A Helm chart for logs
+    digest: ac28aac960b788261470e43d31f8056009307271914d21aa52c6282aaff1a2d0
+    name: elk
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/elk-0.1.7/elk-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v1
+    appVersion: 7.10.0
     created: "2021-09-16T11:02:24.526422546Z"
     description: A Helm chart for logs
     digest: 685a30666aba63559e15b4b607794751d10d3a7b5c2b3e445ca83183df18b5aa
