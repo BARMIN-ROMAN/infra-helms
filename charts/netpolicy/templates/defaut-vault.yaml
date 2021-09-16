@@ -40,7 +40,9 @@ specs:
     - toEntities:
       - host
       toPorts:
-      - ports:
-        - protocol: TCP
-          port: "8443"
+        - ports:
+          - protocol: TCP
+            port: "8443"
+    - toEntities:
+      - remote-node
       
