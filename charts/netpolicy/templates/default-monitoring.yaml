@@ -13,6 +13,8 @@ specs:
           k8s:io.kubernetes.pod.namespace: monitoring
       - matchLabels:
           k8s:io.kubernetes.pod.namespace: kube-system
+    - fromEntities:
+      - remote-node
   - endpointSelector:
       matchLabels:
         k8s:io.kubernetes.pod.namespace: monitoring
@@ -21,6 +23,8 @@ specs:
     - fromEndpoints:
       - matchLabels:
           k8s:io.kubernetes.pod.namespace: {{ .Values.processingNamespace | default .Release.Namespace }}
+    - fromEntities:
+      - remote-node
   - endpointSelector:
       matchLabels:
         k8s:io.kubernetes.pod.namespace: {{ .Values.processingNamespace | default .Release.Namespace }}
@@ -43,4 +47,6 @@ specs:
             path: "/metrics"
           - method: "GET"
             path: "/actuator/prometheus"
+    - fromEntities:
+      - remote-node
       

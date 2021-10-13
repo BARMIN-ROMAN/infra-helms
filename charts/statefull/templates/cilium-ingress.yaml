@@ -13,6 +13,8 @@ spec:
     matchLabels:
       k8s:selector.cilium.rbkmoney/release: {{ .name }}
   ingress:
+  - fromEntities:
+    - remote-node
   - fromEndpoints:
     - matchLabels:
         k8s:selector.cilium.rbkmoney/release: {{ $relname }}

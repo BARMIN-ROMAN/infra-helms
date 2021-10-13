@@ -19,3 +19,5 @@ specs:
     - fromEndpoints:
         - matchLabels:
             k8s:selector.cilium.rbkmoney/release: consul
+    - fromEntities:
+      - remote-node

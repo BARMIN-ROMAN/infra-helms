@@ -16,6 +16,8 @@ spec:
     - ports:
       - port: "9092"
         protocol: TCP
+  - fromEntities:
+    - remote-node
   egress:
   - toEndpoints:
     - matchLabels:

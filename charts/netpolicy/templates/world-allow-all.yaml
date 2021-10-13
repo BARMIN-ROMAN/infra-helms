@@ -2,12 +2,15 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: default-world
+  name: world-allow-all
   namespace: {{ .Values.processingNamespace }}
 specs:
   - endpointSelector:
       matchLabels:
         k8s:io.kubernetes.pod.namespace: {{ .Values.processingNamespace | default .Release.Namespace }}
+    ingress:
+    - fromEntities:
+        - world
     egress:
     - toEntities:
         - world

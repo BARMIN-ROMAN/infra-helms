@@ -1,8 +1,8 @@
-  ---
+---
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "allow-kafka-zookeeper"
+  name: "allow-intra-zookeeper"
   namespace: {{ .Values.processingNamespace | default .Release.Namespace }}
 specs:
   - endpointSelector:
@@ -11,16 +11,20 @@ specs:
     ingress:
     - fromEndpoints:
       - matchLabels:
-          k8s:selector.cilium.rbkmoney/release: kafka 
+          k8s:app.kubernetes.io/name: zookeeper 
       toPorts:
       - ports:
         - port: "2181"
+          protocol: TCP
+        - port: "2888"
+          protocol: TCP
+        - port: "3888"
           protocol: TCP
     - fromEntities:
       - remote-node
   - endpointSelector:
       matchLabels:
-        k8s:selector.cilium.rbkmoney/release: kafka
+        k8s:app.kubernetes.io/name: zookeeper
     egress:
     - toEndpoints:
       - matchLabels:
@@ -28,4 +32,8 @@ specs:
       toPorts:
       - ports:
         - port: "2181"
+          protocol: TCP
+        - port: "2888"
+          protocol: TCP
+        - port: "3888"
           protocol: TCP

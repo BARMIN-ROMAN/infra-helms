@@ -2,30 +2,34 @@
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: "keycloak-postgres"
+  name: "kds-init-task-kds"
   namespace: {{ .Values.processingNamespace | default .Release.Namespace }}
 specs:
   - endpointSelector:
       matchLabels:
-        k8s:selector.cilium.rbkmoney/release: keycloak
+        k8s:job-name: kds-init-task
     egress:
     - toEndpoints:
       - matchLabels:
-          k8s:selector.cilium.rbkmoney/release: postgres
+          k8s:selector.cilium.rbkmoney/release: kds
       toPorts:
       - ports:
         - protocol: TCP
-          port: "5432"
+          port: "8082"
+        - protocol: TCP
+          port: "8083"
   - endpointSelector:
       matchLabels:
-        k8s:selector.cilium.rbkmoney/release: postgres
+        k8s:selector.cilium.rbkmoney/release: kds
     ingress:
     - fromEndpoints:
       - matchLabels:
-          k8s:selector.cilium.rbkmoney/release: keycloak
+          k8s:job-name: kds-init-task
       toPorts:
       - ports:
         - protocol: TCP
-          port: "5432"
+          port: "8082"
+        - protocol: TCP
+          port: "8083"
     - fromEntities:
       - remote-node
