@@ -9,16 +9,16 @@ specs:
       matchLabels:
         k8s:io.kubernetes.pod.namespace: {{ .Values.processingNamespace | default .Release.Namespace }}
     ingress:
-    - fromEntities:
-        - world
-      icmps:
+    - icmps:
       - fields:
         - type: 136
           family: IPv6
+        - type: 135
+          family: IPv6
     egress:
-    - toEntities:
-        - world
-      icmps:
+    - icmps:
       - fields:
         - type: 136
+          family: IPv6
+        - type: 135
           family: IPv6
