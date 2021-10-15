@@ -36,10 +36,7 @@ volumeMounts:
     mountPath: /docker-entrypoint-initdb.d
     readOnly: true
 
-volumes:
-  - name: schema-bootstrap-volume
-    configMap:
-      name: clickhouse
+volumes: []
 
 volumeClaimTemplates:
   - name: data-storage-vc-template
