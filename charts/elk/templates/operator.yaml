@@ -357,7 +357,7 @@ spec:
         - "--cert-validity=8760h"
         - "--cert-rotate-before=24h"
         - "--enable-webhook"
-        - "--ip-family=IPv6"
+        - "--ip-family={{ .Values.operator.ipFamily }}"
         env:
         - name: OPERATOR_NAMESPACE
           valueFrom:

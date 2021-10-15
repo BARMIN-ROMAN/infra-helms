@@ -1,12 +1,13 @@
 {{ if .Values.ciliumPolicies }}
 {{- $relname := .Release.Name -}}
+{{- $relnamespace := .Release.Namespace -}}
 {{ range .Values.ciliumPolicies }}
 ---
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
   name: {{ $relname }}-{{ .name }}-ingress
-  namespace: default
+  namespace: {{ $relnamespace }}
 spec:
   endpointSelector:
     matchLabels:
