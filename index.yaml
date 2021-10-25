@@ -1,5 +1,26 @@
 apiVersion: v1
 entries:
+  clickhouse:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-10-25T10:34:19.400665562Z"
+    description: A Clickhouse-cluster Helm chart for Kubernetes
+    digest: bd0870b645ac05dc3f82da1ce51146eaa503407b5cd049ecf6ec0364940e524d
+    name: clickhouse
+    type: application
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/clickhouse-0.1.11/clickhouse-0.1.11.tgz
+    version: 0.1.11
+  clickhouse-operator:
+  - apiVersion: v1
+    appVersion: "0.16"
+    created: "2021-10-25T10:34:19.542093127Z"
+    description: A Helm chart for clickhouse operator
+    digest: 91b16c783a53bc4c1a62a817383d2a0201f464f3635327377cb7ab645ac9bd18
+    name: clickhouse-operator
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/clickhouse-operator-0.1.1/clickhouse-operator-0.1.1.tgz
+    version: 0.1.1
   elk:
   - apiVersion: v1
     appVersion: 7.10.0
@@ -287,6 +308,15 @@ entries:
     - https://github.com/rbkmoney/charts/releases/download/statefull-0.1.1/statefull-0.1.1.tgz
     version: 0.1.1
   stateless:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2021-10-25T10:34:19.684154188Z"
+    description: A Helm chart for stateless RBK.money services
+    digest: 47680025823e75e14e714548dd61c2c374d1744f7388e0206a1f444026775b22
+    name: stateless
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/stateless-0.1.21/stateless-0.1.21.tgz
+    version: 0.1.21
   - apiVersion: v1
     appVersion: "1.0"
     created: "2021-09-10T16:12:50.802551808Z"
