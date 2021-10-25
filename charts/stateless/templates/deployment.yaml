@@ -49,10 +49,13 @@ spec:
       initContainers:
     {{- if .Values.apiInitContainers.enabled }}
         - name: fetch-keycloack-pubkey
-          image: busybox:1.32
+          image: {{ .Values.apiInitContainers.image | default "busybox:1.32" }}
           env:
           - name: TARGET
             value: "/var/keycloak/keycloak.pubkey.pem"
+          {{- with .Values.apiInitContainers.env }}
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
           command:
             - /bin/sh
             - -c
