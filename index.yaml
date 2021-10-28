@@ -3,6 +3,16 @@ entries:
   clickhouse:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-10-28T22:41:22.199139231Z"
+    description: A Clickhouse-cluster Helm chart for Kubernetes
+    digest: 188f4a64d4d17fbc65b091903e7cc3239babe1756b853a1d8eb5004f57fcfa6a
+    name: clickhouse
+    type: application
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/clickhouse-0.1.12/clickhouse-0.1.12.tgz
+    version: 0.1.12
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-10-25T10:34:19.400665562Z"
     description: A Clickhouse-cluster Helm chart for Kubernetes
     digest: bd0870b645ac05dc3f82da1ce51146eaa503407b5cd049ecf6ec0364940e524d
@@ -12,6 +22,15 @@ entries:
     - https://github.com/rbkmoney/charts/releases/download/clickhouse-0.1.11/clickhouse-0.1.11.tgz
     version: 0.1.11
   clickhouse-operator:
+  - apiVersion: v1
+    appVersion: "0.16"
+    created: "2021-10-28T22:41:22.337480315Z"
+    description: A Helm chart for clickhouse operator
+    digest: 992747387b9230799d0221418bd367945c6234128cbcd7793a3cbcf0bb138d86
+    name: clickhouse-operator
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/clickhouse-operator-0.1.2/clickhouse-operator-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v1
     appVersion: "0.16"
     created: "2021-10-25T10:34:19.542093127Z"
