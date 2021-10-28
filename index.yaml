@@ -79,6 +79,16 @@ entries:
   netpolicy:
   - apiVersion: v2
     appVersion: 1.9.0
+    created: "2021-10-28T16:44:25.721926661Z"
+    description: A Helm chart for Kubernetes
+    digest: d3a76d6945dcc3a1917c93393c9bddf7afab2c75ee8e38db946068485e4dae15
+    name: netpolicy
+    type: application
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/netpolicy-0.1.15/netpolicy-0.1.15.tgz
+    version: 0.1.15
+  - apiVersion: v2
+    appVersion: 1.9.0
     created: "2021-01-15T14:34:09.840159557Z"
     description: A Helm chart for Kubernetes
     digest: 61ff48513d6cdbc9c51f7d5c2cd77006a1a2fa55563cdeea914d923f19c615ee
@@ -308,6 +318,15 @@ entries:
     - https://github.com/rbkmoney/charts/releases/download/statefull-0.1.1/statefull-0.1.1.tgz
     version: 0.1.1
   stateless:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2021-10-28T16:44:25.857491429Z"
+    description: A Helm chart for stateless RBK.money services
+    digest: cf2623c48e4aca22502b483f8fa6df7827718b2bb4b4c704b38ddfea7810e2b7
+    name: stateless
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/stateless-0.1.23/stateless-0.1.23.tgz
+    version: 0.1.23
   - apiVersion: v1
     appVersion: "1.0"
     created: "2021-10-25T10:34:19.684154188Z"
