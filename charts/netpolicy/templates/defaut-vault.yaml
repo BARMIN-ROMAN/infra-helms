@@ -36,11 +36,17 @@ specs:
   - endpointSelector:
       matchLabels:
         k8s:app.kubernetes.io/name: vault-agent-injector
-    egress:
-    - toEntities:
-      - host
+    ingress:
+    - fromEntities:
+      - remote-node
       toPorts:
       - ports:
-        - protocol: TCP
-          port: "8443"
+        - port: "8080"
+          protocol: TCP
+  - egress:
+    - toEntities:
+      - remote-node
+    endpointSelector:
+      matchLabels:
+        k8s:app.kubernetes.io/name: vault-agent-injector
       
