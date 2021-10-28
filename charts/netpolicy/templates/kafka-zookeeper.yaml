@@ -7,7 +7,7 @@ metadata:
 specs:
   - endpointSelector:
       matchLabels:
-        k8s:app: zookeeper
+        k8s:app.kubernetes.io/name: zookeeper
     ingress:
     - fromEndpoints:
       - matchLabels:
@@ -22,7 +22,7 @@ specs:
     egress:
     - toEndpoints:
       - matchLabels:
-          k8s:app: zookeeper
+          k8s:app.kubernetes.io/name: zookeeper
       toPorts:
       - ports:
         - port: "2181"
