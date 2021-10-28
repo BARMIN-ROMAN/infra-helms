@@ -2,7 +2,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ include "stateless.fullname" . }}
+  name: {{ include "stateless.fullname" . }}-cj
   labels:
     {{- include "stateless.labels" . | nindent 4 }}
 spec:
@@ -24,7 +24,7 @@ spec:
           {{- end }}
           serviceAccountName: {{ include "stateless.serviceAccountName" . }}
           containers:
-            - name: {{ .Release.Name }}-cronjob
+            - name: {{ .Release.Name }}-cj
               image: "{{ .Values.cronjob.image.repository }}:{{ .Values.cronjob.image.tag | default .Chart.AppVersion }}"
               imagePullPolicy: {{ .Values.cronjob.image.pullPolicy }}
               args:
