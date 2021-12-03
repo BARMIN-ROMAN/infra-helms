@@ -19,6 +19,7 @@ elastic:
     podTemplate: {}
   data:
     replicas: 1
+    volumeTemplate: {}
     podTemplate: {}
     retention:
       rollover: 2
