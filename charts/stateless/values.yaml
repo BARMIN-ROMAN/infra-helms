@@ -129,7 +129,7 @@ metrics:
 
 logs:
   enabled: true
-  json: false
+  json: true
 
 ciliumPolicies: []
   # - name: consul
