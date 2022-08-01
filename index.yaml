@@ -385,6 +385,15 @@ entries:
   stateless:
   - apiVersion: v1
     appVersion: "1.0"
+    created: "2022-08-01T18:59:18.700190442Z"
+    description: A Helm chart for stateless RBK.money services
+    digest: 44b8fa984e5f9a63ec247c179d4666ad8832d2c45be4f84ac76da08da285f4a8
+    name: stateless
+    urls:
+    - https://github.com/rbkmoney/charts/releases/download/stateless-0.1.28/stateless-0.1.28.tgz
+    version: 0.1.28
+  - apiVersion: v1
+    appVersion: "1.0"
     created: "2022-08-01T18:49:09.491578234Z"
     description: A Helm chart for stateless RBK.money services
     digest: e7cefa431b080212b5d41a21e6a636c006c39a993b14b77c85836af6c58d7d30
