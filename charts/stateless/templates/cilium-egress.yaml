@@ -1,4 +1,4 @@
-{{ if .Values.ciliumPolicies }}
+{{ if .Values.EgressCiliumPolicy }}
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
@@ -9,10 +9,17 @@ spec:
     matchLabels:
       k8s:selector.cilium.rbkmoney/release: {{ .Release.Name }}
   egress:
-  {{- range .Values.ciliumPolicies }}
+  {{- range .Values.EgressCiliumPolicy }}
+  {{- if .release }}
   - toEndpoints:
     - matchLabels:
-        k8s:selector.cilium.rbkmoney/release: {{ .name }}
+        k8s:selector.cilium.rbkmoney/release: {{ .release }}
+  {{- else if .FQDNs }}
+  - toFQDNs:
+    {{- range .FQDNs }}
+    - matchName: "{{ . }}"
+    {{- end }}
+  {{- end }}
     toPorts:
       - ports:
     {{- range .filters }}

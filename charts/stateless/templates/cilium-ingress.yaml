@@ -1,17 +1,17 @@
-{{ if .Values.ciliumPolicies }}
+{{ if .Values.IngressCiliumPolicies }}
 {{- $relname := .Release.Name -}}
 {{- $relnamespace := .Release.Namespace -}}
-{{ range .Values.ciliumPolicies }}
+{{ range .Values.IngressCiliumPolicies }}
 ---
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
-  name: {{ $relname }}-{{ .name }}-ingress
+  name: {{ $relname }}-{{ .release }}-ingress
   namespace: {{ $relnamespace }}
 spec:
   endpointSelector:
     matchLabels:
-      k8s:selector.cilium.rbkmoney/release: {{ .name }}
+      k8s:selector.cilium.rbkmoney/release: {{ .release }}
   ingress:
   - fromEndpoints:
     - matchLabels:
