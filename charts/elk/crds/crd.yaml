@@ -1,6 +1,6 @@
 ---
 # Source: eck-operator/charts/eck-operator-crds/templates/all-crds.yaml
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
@@ -285,7 +285,7 @@ status:
   storedVersions: []
 ---
 # Source: eck-operator/charts/eck-operator-crds/templates/all-crds.yaml
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
@@ -762,7 +762,7 @@ status:
   storedVersions: []
 ---
 # Source: eck-operator/charts/eck-operator-crds/templates/all-crds.yaml
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
@@ -1069,7 +1069,7 @@ status:
   storedVersions: []
 ---
 # Source: eck-operator/charts/eck-operator-crds/templates/all-crds.yaml
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
@@ -2166,7 +2166,7 @@ status:
   storedVersions: []
 ---
 # Source: eck-operator/charts/eck-operator-crds/templates/all-crds.yaml
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
@@ -2588,7 +2588,7 @@ status:
   storedVersions: []
 ---
 # Source: eck-operator/charts/eck-operator-crds/templates/all-crds.yaml
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
